@@ -4,25 +4,42 @@
 // if divided by both 3 & 4 output: 'Bish-Bosh' instead of number
 // Exempel: 1, 2, Bish, Bosh, 5, Bish, 7, Bosh, Bish, 10, 11, Bish-Bosh, 13, 14, Bish [...]
 
-// Values initialized
-let x = "Bish";
-let y = "Bosh";
-let xy = "Bish-Bosh";
+function bishBosh() {
+  // Values initialized
+  let x = "Bish";
+  let y = "Bosh";
 
-// Creating for loop with num 1-100
-for (let num = 1; num <= 100; num++) {
-  // If num is dividable by 3 and 4 print xy = "Bish-Bosh"
-  if (num % 3 === 0 && num % 4 === 0) {
-    console.log(num + " " + xy);
+  // Get user input values for Bish, Bosh, and loop length
+  let bishValue = parseInt(document.getElementById("bish").value);
+  let boshValue = parseInt(document.getElementById("bosh").value);
+  let loopLength = parseInt(document.getElementById("loopLength").value);
+
+  // Validate that the user input values are positive
+  if (bishValue <= 0 || boshValue <= 0 || loopLength <= 0) {
+    alert("Please enter positive values for Bish, Bosh, and Loop Length.");
+    return;
   }
-  // If num is dividable by 4 print y = "Bosh"
-  else if (num % 4 === 0) {
-    console.log(num + " " + y);
-    // If num is dividable by 3 print x = "Bish"
-  } else if (num % 3 === 0) {
-    console.log(num + " " + x);
-    // If num is not dividable by 3 and 4 print num
-  } else {
-    console.log(num);
+
+  // Creating for loop with num 1-100
+  for (let num = 1; num <= loopLength; num++) {
+    let message = "";
+
+    // If num is dividable by 3 and 4 print xy = "Bish-Bosh"
+    if (num % bishValue === 0 && num % boshValue === 0) {
+      message = x + " " + y;
+    }
+    // If num is dividable by 4 print y = "Bosh"
+    else if (num % boshValue === 0) {
+      message = y;
+      // If num is dividable by 3 print x = "Bish"
+    } else if (num % bishValue === 0) {
+      message = x;
+      // If num is not dividable by 3 and 4 print num
+    } else {
+      message = num;
+    }
+    document.getElementById("JS-content").innerHTML += message + "<br>";
   }
 }
+
+bishBosh();
